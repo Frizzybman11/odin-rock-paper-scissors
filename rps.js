@@ -1,34 +1,44 @@
 function playRound(playerSelection, computerSelection) {
-    switch (playerSelection, computerSelection) {
-        case ("Rock", "Rock"):
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
+    switch ([playerSelection, computerSelection].join(',')) {
+        case ("rock,rock"):
             roundMessage = "Draw! Try again!";
+            return roundMessage
             break;
-        case ("Rock", "Paper"):
+        case ("rock,paper"):
             roundMessage = "You lose! Paper beats Rock!";
+            return roundMessage
             break;
-        case ("Rock", "Scissors"):
+        case ("rock,scissors"):
             roundMessage = "You win! Rock beats Scissors!";
+            return roundMessage
             break;
-        case ("Paper", "Paper"):
+        case ("paper,paper"):
             roundMessage = "Draw! Try again!";
+            return roundMessage
             break;
-        case ("Paper", "Rock"):
+        case ("paper,rock"):
             roundMessage = "You win! Paper beats Rock!";
+            return roundMessage
             break;
-        case ("Paper", "Scissors"):
+        case ("paper,scissors"):
             roundMessage = "You lose! Scissors beats Paper!";
+            return roundMessage
             break;
-        case ("Scissors", "Scissors"):
-                roundMessage = "Draw! Try again!";
-                break;
-        case ("Scissors", "Rock"):
+        case ("scissors,scissors"):
+            roundMessage = "Draw! Try again!";
+            return roundMessage
+            break;
+        case ("scissors,rock"):
             roundMessage = "You lose! Rock beats Scissors!";
+            return roundMessage
             break;
-        case ("Scissors", "Paper"):
+        case ("scissors,paper"):
             roundMessage = "You win! Scissors beats Paper!";
+            return roundMessage
             break;
     }
-    return roundMessage
 }
 
 function computerPlay() {
