@@ -1,3 +1,5 @@
+let roundMessage;
+
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
     computerSelection = computerSelection.toLowerCase();
@@ -50,5 +52,34 @@ function computerPlay() {
         return "Paper"
     } else {
         return "Scissors"
+    }
+}
+
+function game() {
+    let playerPoint = 0
+    let computerPoint = 0
+    for (let i = 0; i < 5; i++) {
+        playRound(prompt(), computerPlay());
+        roundSlice = roundMessage.slice(0,5);
+
+        switch (roundSlice) {
+            case ("You w"):
+                playerPoint++;
+                break;
+            case ("You l"):
+                computerPoint++;
+                break;
+            case ("Draw!"):
+                break;
+        }
+        console.log(roundMessage)
+        console.log("Player: ",playerPoint," | Computer: ",computerPoint);
+    }
+    if (playerPoint > computerPoint) {
+        console.log("Game over. You win!")
+    } else if (computerPoint > playerPoint) {
+        console.log("Game over. You lose!")
+    } else {
+        console.log("Game over. It's a tie!")
     }
 }
