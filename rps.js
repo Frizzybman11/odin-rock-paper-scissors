@@ -1,13 +1,25 @@
 let roundMessage;
+let gameStatus;
+let playerPoint;
+let computerPoint;
+let playerChoice;
 const btn = document.querySelectorAll(".btn");
+const results = document.querySelector("#results");
 
+//RPS Game
 btn.forEach((button) => {
     button.addEventListener('click', () => {
-        let playerChoice = button.id;
-        console.log(playRound(playerChoice, computerPlay()));
+        if (gameStatus == "Complete"){
+            playerPoint = 0
+            computerPoint = 0
+            gameStatus = "Incomplete"
+        }
+        playerChoice = button.id;
+        roundMessage = playRound(playerChoice, computerPlay());
+        roundSlice = roundMessage.slice(0,5);
+        results.textContent = roundMessage;
     })
 });
-
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
@@ -64,11 +76,14 @@ function computerPlay() {
     }
 }
 
-//function game() {
-//     let playerPoint = 0
-//     let computerPoint = 0
+// function factorScore() {
 //     //for (let i = 0; i < 5; i++) {
-//     //    playRound(prompt(), computerPlay());
+//     if (gameStatus == "Complete"){
+//         playerPoint = 0
+//         computerPoint = 0
+//         gameStatus == "Incomplete"
+//     }
+//        playRound(prompt(), computerPlay());
 //         roundSlice = roundMessage.slice(0,5);
 
 //         switch (roundSlice) {
