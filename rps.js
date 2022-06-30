@@ -1,4 +1,13 @@
 let roundMessage;
+const btn = document.querySelectorAll(".btn");
+
+btn.forEach((button) => {
+    button.addEventListener('click', () => {
+        let playerChoice = button.id;
+        console.log(playRound(playerChoice, computerPlay()));
+    })
+});
+
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
@@ -55,31 +64,31 @@ function computerPlay() {
     }
 }
 
-function game() {
-    let playerPoint = 0
-    let computerPoint = 0
-    for (let i = 0; i < 5; i++) {
-        playRound(prompt(), computerPlay());
-        roundSlice = roundMessage.slice(0,5);
+//function game() {
+//     let playerPoint = 0
+//     let computerPoint = 0
+//     //for (let i = 0; i < 5; i++) {
+//     //    playRound(prompt(), computerPlay());
+//         roundSlice = roundMessage.slice(0,5);
 
-        switch (roundSlice) {
-            case ("You w"):
-                playerPoint++;
-                break;
-            case ("You l"):
-                computerPoint++;
-                break;
-            case ("Draw!"):
-                break;
-        }
-        console.log(roundMessage)
-        console.log("Player: ",playerPoint," | Computer: ",computerPoint);
-    }
-    if (playerPoint > computerPoint) {
-        console.log("Game over. You win!")
-    } else if (computerPoint > playerPoint) {
-        console.log("Game over. You lose!")
-    } else {
-        console.log("Game over. It's a tie!")
-    }
-}
+//         switch (roundSlice) {
+//             case ("You w"):
+//                 playerPoint++;
+//                 break;
+//             case ("You l"):
+//                 computerPoint++;
+//                 break;
+//             case ("Draw!"):
+//                 break;
+//         }
+//         console.log(roundMessage)
+//         console.log("Player: ",playerPoint," | Computer: ",computerPoint);
+//     }
+//     if (playerPoint > computerPoint) {
+//         console.log("Game over. You win!")
+//     } else if (computerPoint > playerPoint) {
+//         console.log("Game over. You lose!")
+//     } else {
+//         console.log("Game over. It's a tie!")
+//     }
+// }
