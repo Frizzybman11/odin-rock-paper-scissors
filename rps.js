@@ -1,25 +1,76 @@
 let roundMessage;
-let gameStatus;
-let playerPoint;
-let computerPoint;
+let gameStatus = "Incomplete";
+let playerPoint = 0;
+let computerPoint = 0;
 let playerChoice;
+let roundCount = 0;
+let victor = "";
+
 const btn = document.querySelectorAll(".btn");
 const results = document.querySelector("#results");
+const playerScore = document.querySelector("#playerScore");
+const computerScore = document.querySelector("#computerScore");
+
+const gameOver = document.createElement('div');
+gameOver.textContent = "Game Over!";
+
+const reset = document.createElement('button');
+reset.textContent = "Reset";
 
 //RPS Game
 btn.forEach((button) => {
     button.addEventListener('click', () => {
-        if (gameStatus == "Complete"){
-            playerPoint = 0
-            computerPoint = 0
-            gameStatus = "Incomplete"
+        if (roundCount != 5 && gameStatus == "Incomplete") {
+            playerChoice = button.id;
+            roundMessage = playRound(playerChoice, computerPlay());
+            roundSlice = roundMessage.slice(0,5);
+            switch (roundSlice) {
+                case ("You w"):
+                    results.textContent = roundMessage;
+                    roundCount++;
+                    playerPoint++;
+                    playerScore.textContent = "Player Score: " + playerPoint;
+                    break;
+                case ("You l"):
+                    results.textContent = roundMessage;
+                    roundCount++;
+                    computerPoint++;
+                    computerScore.textContent = "Computer Score: " + computerPoint;
+                    break;
+                case ("Draw!"):
+                    results.textContent = roundMessage;
+                    roundCount++;
+                    break;
+            }
         }
-        playerChoice = button.id;
-        roundMessage = playRound(playerChoice, computerPlay());
-        roundSlice = roundMessage.slice(0,5);
-        results.textContent = roundMessage;
+        if (roundCount === 5) {
+            if (playerPoint > computerPoint) {
+                victorMessage = "You win!";
+            } else if (computerPoint > playerPoint) {
+                victorMessage = "Computer wins!";
+            } else {
+                victorMessage = "It's a tie!";
+            }
+            gameStatus = "Complete";
+            gameOver.textContent = "Game Over! " + victorMessage;
+            results.appendChild(gameOver);
+            results.appendChild(reset);
+            return;
+        }
     })
 });
+
+reset.addEventListener('click', () => {
+    playerPoint = 0;
+    playerScore.textContent = "Player Score: " + playerPoint;
+    computerPoint = 0;
+    computerScore.textContent = "Computer Score: " + computerPoint;
+    roundCount = 0;
+    results.removeChild(gameOver);
+    results.removeChild(reset);
+    results.textContent = "";
+    gameStatus = "Incomplete";
+})
 
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase();
@@ -75,35 +126,3 @@ function computerPlay() {
         return "Scissors"
     }
 }
-
-// function factorScore() {
-//     //for (let i = 0; i < 5; i++) {
-//     if (gameStatus == "Complete"){
-//         playerPoint = 0
-//         computerPoint = 0
-//         gameStatus == "Incomplete"
-//     }
-//        playRound(prompt(), computerPlay());
-//         roundSlice = roundMessage.slice(0,5);
-
-//         switch (roundSlice) {
-//             case ("You w"):
-//                 playerPoint++;
-//                 break;
-//             case ("You l"):
-//                 computerPoint++;
-//                 break;
-//             case ("Draw!"):
-//                 break;
-//         }
-//         console.log(roundMessage)
-//         console.log("Player: ",playerPoint," | Computer: ",computerPoint);
-//     }
-//     if (playerPoint > computerPoint) {
-//         console.log("Game over. You win!")
-//     } else if (computerPoint > playerPoint) {
-//         console.log("Game over. You lose!")
-//     } else {
-//         console.log("Game over. It's a tie!")
-//     }
-// }
